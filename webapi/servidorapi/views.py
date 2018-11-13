@@ -51,6 +51,40 @@ def alumno_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def alumno_detail(request, pk):
+    '''
+    Detalles, actualizar o eliminar alumno
+    '''
+    try:
+        alumno = Alumno.objects.get(pk=pk)
+    except Alumno.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = AlumnoSerializer(alumno)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = AlumnoSerializer(alumno, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        alumno.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+'''
+Coordinadores
+'''
+@api_view(['GET','POST'])
+def coordinadores_list(request):
+    if request.method == 'GET':
+        pass
+
+    elif request.method == 'POST':
+        pass
     pass
 
 '''
