@@ -114,3 +114,7 @@ def coordinador_detail(request, pk):
     elif request.method == 'DELETE':
         coordinador.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+'''
+Vistas Brenda
+'''
