@@ -115,6 +115,198 @@ def coordinador_detail(request, pk):
         coordinador.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+'''Vistas Brenda'''
 '''
-Vistas Brenda
+Escuela
 '''
+@api_view(['GET','POST'])
+def escuela_list(request):
+    if request.method == 'GET':
+        escuela = Escuela.objects.all()
+        seralizer = EscuelaSerializer(escuela, many=True)
+        return Response(seralizer.data)
+
+    elif request.method == 'POST':
+        seralizer = EscuelaSerializer(data=request.data)
+        if seralizer.is_valid():
+            seralizer.save()
+            return Response(seralizer.data, status=status.HTTP_201_CREATED)
+        return Response(seralizer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def escuela_detail(request, pk):
+    try:
+        escuela = Escuela.objects.get(pk=pk)
+    except Escuela.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = EscuelaSerializer(escuela)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = EscuelaSerializer(escuela, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        escuela.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+'''
+Docente
+'''
+@api_view(['GET','POST'])
+def docente_list(request):
+    if request.method == 'GET':
+        docente = Docente.objects.all()
+        seralizer = DocenteSerializer(docente, many=True)
+        return Response(seralizer.data)
+
+    elif request.method == 'POST':
+        seralizer = DocenteSerializer(data=request.data)
+        if seralizer.is_valid():
+            seralizer.save()
+            return Response(seralizer.data, status=status.HTTP_201_CREATED)
+        return Response(seralizer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def docente_detail(request, pk):
+    try:
+        docente = Docente.objects.get(pk=pk)
+    except Docente.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = DocenteSerializer(docente)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = DocenteSerializer(docente, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        docente.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+		
+'''
+Boleta
+'''
+@api_view(['GET','POST'])
+def boleta_list(request):
+    if request.method == 'GET':
+        boleta = Boleta.objects.all()
+        seralizer = BoletaSerializer(boleta, many=True)
+        return Response(seralizer.data)
+
+    elif request.method == 'POST':
+        seralizer = BoletaSerializer(data=request.data)
+        if seralizer.is_valid():
+            seralizer.save()
+            return Response(seralizer.data, status=status.HTTP_201_CREATED)
+        return Response(seralizer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def boleta_detail(request, pk):
+    try:
+        boleta = Boleta.objects.get(pk=pk)
+    except Boleta.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = BoletaSerializer(boleta)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = BoletaSerializer(boleta, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        boleta.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+		
+'''
+Clase
+'''
+@api_view(['GET','POST'])
+def clase_list(request):
+    if request.method == 'GET':
+        clase = Clase.objects.all()
+        seralizer = ClaseSerializer(clase, many=True)
+        return Response(seralizer.data)
+
+    elif request.method == 'POST':
+        seralizer = ClaseSerializer(data=request.data)
+        if seralizer.is_valid():
+            seralizer.save()
+            return Response(seralizer.data, status=status.HTTP_201_CREATED)
+        return Response(seralizer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def clase_detail(request, pk):
+    try:
+        clase = Clase.objects.get(pk=pk)
+    except Clase.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ClaseSerializer(Clase)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ClaseSerializer(clase, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        clase.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+		
+'''
+Parcial
+'''
+@api_view(['GET','POST'])
+def parcial_list(request):
+    if request.method == 'GET':
+        parcial = Parcial.objects.all()
+        seralizer = ParcialSerializer(parcial, many=True)
+        return Response(seralizer.data)
+
+    elif request.method == 'POST':
+        seralizer = ParcialSerializer(data=request.data)
+        if seralizer.is_valid():
+            seralizer.save()
+            return Response(seralizer.data, status=status.HTTP_201_CREATED)
+        return Response(seralizer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def parcial_detail(request, pk):
+    try:
+        parcial = Parcial.objects.get(pk=pk)
+    except Parcial.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ParcialSerializer(Parcial)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ParcialSerializer(parcial, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        parcial.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
