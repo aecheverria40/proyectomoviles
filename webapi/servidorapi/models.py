@@ -6,7 +6,7 @@ from django.dispatch import receiver
 
 # Create your models here.
 class Coordinador(models.Model):
-    IdCoordinador = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     apellidoPaternoCoordinador = models.CharField(max_length=100)
     apellidoMaternoCoordinador = models.CharField(max_length=100)
     nombreCoordinador = models.CharField(max_length=100)
@@ -20,7 +20,7 @@ class Coordinador(models.Model):
 
 
     def __str__(self):
-        return str(self.IdCoordinador)
+        return str(self.user.username)
 
     def getNombreCompleto(self):
         return self.nombreCoordinador + ' ' + self.apellidoPaternoCoordinador + ' ' + self.apellidoMaternoCoordinador
