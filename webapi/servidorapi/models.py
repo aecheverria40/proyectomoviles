@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Coordinador(models.Model):
-
     IdCoordinador = models.OneToOneField(User, on_delete=models.CASCADE)
     apellidoPaternoCoordinador = models.CharField(max_length=100)
     apellidoMaternoCoordinador = models.CharField(max_length=100)
@@ -32,6 +33,21 @@ class Coordinador(models.Model):
 
     def getEmail(self):
         return self.email_Coordinador
+
+
+#Abiel
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Coordinador.objects.create(user=instance)
+    instance.coordinador.save()
+
+#Max Gordon
+# def crate_coordinador(sender, **kwargs):
+#     if kwargs['created']:
+#         user_profile = Coordinador.objects.create(user=kwargs['instance'])
+
+# post_save.connect(crate_coordinador, sender=User)
 
 class Escuela(models.Model):
     clave = models.CharField(max_length=100, primary_key=True)

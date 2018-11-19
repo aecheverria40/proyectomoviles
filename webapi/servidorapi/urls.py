@@ -17,6 +17,10 @@ urlpatterns = [
     path('clase/<int:pk>', views.clase_detail),
 	path('parcial/', views.coordinador_list),
     path('parcial/<int:pk>', views.parcial_detail),
+
+    #Prueba
+    path('coordinadores/', views.user_view),
+    path('register/', views.UserCreateAPI.as_view(), name='register')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
