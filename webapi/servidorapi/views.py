@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group
 #Importar clase de rest_framework
 from rest_framework import viewsets
 #Importamos las cases de serializers.py
-from servidorapi.serializers import UserSerializer, GroupSerializer
+from servidorapi.serializers import UserSerializer, GroupSerializer, UserApiSerializer
 
 #Cosas a importar
 from rest_framework import status, permissions
@@ -15,6 +15,11 @@ Parcial)
 #Importar Serializers
 from .serializers import (AlumnoSerializer, BoletaSerializer,
 ClaseSerializer, CoordinadorSerializer, DocenteSerializer, EscuelaSerializer)
+
+from rest_framework.generics import CreateAPIView
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
@@ -31,7 +36,46 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+class CoornidadorViewSet(viewsets.ModelViewSet):
+    queryset = Coordinador.objects.all()
+    serializer_class = UserApiSerializer
+    http_method_names = ['get', 'put', 'patch', 'head']
+
+class UserCreateAPI(CreateAPIView):
+    serializer_class = UserApiSerializer
+    queryset = User.objects.all()
+        
+                       
+
 #De aqui para abajo los avances para la diapositiva
+
+#De prueba POST y GET de Usar
+@api_view(['GET','POST'])
+def user_view(request, format=None):
+    if request.method == 'GET':
+        user = User.objects.all()
+        seralizer = UserApiSerializer(user, many=True)
+        return Response(seralizer.data)
+
+    elif request.method == 'POST':
+        seralizer = UserApiSerializer(data=request.data)
+        if seralizer.is_valid():
+            seralizer.save()
+            # user.refresh_from_db()
+            # user.coordinador.apellidoMaternoCoordinador = "Mario"
+            # user.coordinador.nombreCoordinador = "Mario"
+            # user.coordinador.direccionCoordinador = "Mario"
+            # user.coordinador.telefonoCoordinador = "6641234567"
+            # coordinador.IdCoordinador = user.id
+            # user.first_name = seralizer.coordinador.nombreCoordinador
+            # user.last_name = seralizer.coordinador.apellidoPaternoCoordinador
+            # user.coordinador.email_Coordinador = user.email
+            # user.set_password(validated_data['password'])
+            # user.save()
+            return Response(seralizer.data, status=status.HTTP_201_CREATED)
+        return Response(seralizer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['GET', 'POST'])
 #@permission_classes((permissions.AllowAny,))
 def alumno_list(request, format=None):
