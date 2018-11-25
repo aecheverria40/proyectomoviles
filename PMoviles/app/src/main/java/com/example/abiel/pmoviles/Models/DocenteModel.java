@@ -1,4 +1,4 @@
-package com.example.abiel.pmoviles;
+package com.example.abiel.pmoviles.Models;
 
 public class DocenteModel {
     public int IdDocente;

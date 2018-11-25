@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.io.PrintWriter;
+import com.example.abiel.pmoviles.Interface.UsuarioService;
+import com.example.abiel.pmoviles.Interface.CoordinadorService;
+import com.example.abiel.pmoviles.Models.CoordinadorModel;
+import com.example.abiel.pmoviles.Models.UsuarioModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +18,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.POST;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,19 +34,17 @@ public class MainActivity extends AppCompatActivity {
         list = findViewById(R.id.list);
 
         list.setAdapter(arrayAdapter);
-        //getPosts2(arrayAdapter);
-        getPosts(arrayAdapter);
-        //getUsuarios(arrayAdapter);
+        getCoordinadores(arrayAdapter);
 
     }
 
-    private void getPosts(final ArrayAdapter arrayAdapter) {
+    private void getCoordinadores(final ArrayAdapter arrayAdapter) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.94:8000")
+                .baseUrl("http://alejandro123.pythonanywhere.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        PostService postService = retrofit.create(PostService.class);
-        Call< List<CoordinadorModel> > call = postService.getPost();
+        CoordinadorService coordinadorService = retrofit.create(CoordinadorService.class);
+        Call< List<CoordinadorModel> > call = coordinadorService.getCoordinador();
 
         call.enqueue(new Callback<List<CoordinadorModel>>() {
             @Override
@@ -56,56 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<CoordinadorModel>> call, Throwable t) {
-            }
-        });
-    }
-
-    private void getUsuarios(final ArrayAdapter arrayAdapter){
-        Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("https://webapi.casasredposventa.com").
-                addConverterFactory(GsonConverterFactory.create()).build();
-
-        GetService getService = retrofit.create(GetService.class);
-        Call<List<UsuarioModel>> call = getService.getUsuarios();
-
-        call.enqueue(new Callback<List<UsuarioModel>>() {
-            @Override
-            public void onResponse(Call<List<UsuarioModel>> call, Response<List<UsuarioModel>> response) {
-                for (UsuarioModel post : response.body()){
-                    titles.add(post.getUsu_nombre() + post.getUsu_apellidoPa());
-                    //arrayAdapter.notifyDataSetChanged();
-
-                }
-
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<UsuarioModel>> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void getPosts2(final ArrayAdapter arrayAdapter) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        PostService2 postService = retrofit.create(PostService2.class);
-        Call< List<Post> > call = postService.getPost();
-
-        call.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                for(Post post : response.body()) {
-                    titles.add(post.getTitle());
-                }
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
             }
         });
     }

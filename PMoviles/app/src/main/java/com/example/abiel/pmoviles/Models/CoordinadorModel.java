@@ -1,6 +1,6 @@
-package com.example.abiel.pmoviles;
+package com.example.abiel.pmoviles.Models;
 
-public class CoordinadorModel {
+public class CoordinadorModel extends UsuarioModel {
     public int IdCoordinador;
     public String apellidoMaternoCoordinador;
     public String apellidoPaternoCoordinador;
