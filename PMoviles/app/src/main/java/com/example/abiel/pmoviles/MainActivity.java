@@ -2,6 +2,7 @@ package com.example.abiel.pmoviles;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private Toolbar toolbar;
     ListView list;
     ArrayList<String> titles = new ArrayList<>();
 
@@ -29,7 +30,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Toolbar
+        //toolbar = findViewById(R.id.toolBar);
+        //setSupportActionBar(toolbar);
 
+        //Cliente para Get
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles);
         list = findViewById(R.id.list);
 
@@ -40,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getCoordinadores(final ArrayAdapter arrayAdapter) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://alejandro123.pythonanywhere.com")
+                .baseUrl("http://alejandro123.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         CoordinadorService coordinadorService = retrofit.create(CoordinadorService.class);

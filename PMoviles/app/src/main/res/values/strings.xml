@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PMoviles</string>
+    <string name="app_name">Proyecto Aplicaciones Móviles</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -13,4 +13,18 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="action_submit">Submit</string>
+    <string name="title_enter_post">Registro de Usuario</string>
+    <string name="hint_title">Body</string>
+    <string name="hint_body">Contraseña</string>
+    <string name="user_name">Usuario</string>
+    <string name="title_activity_main3">Main3Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

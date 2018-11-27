@@ -16,7 +16,7 @@ Parcial)
 from .serializers import (AlumnoSerializer, BoletaSerializer,
 ClaseSerializer, CoordinadorSerializer, DocenteSerializer, EscuelaSerializer)
 
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -36,10 +36,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
-class CoornidadorViewSet(viewsets.ModelViewSet):
-    queryset = Coordinador.objects.all()
-    serializer_class = UserApiSerializer
-    http_method_names = ['get', 'put', 'patch', 'head']
+#De aqui para abajo los avances para la diapositiva
 
 class UserCreateAPI(CreateAPIView):
     serializer_class = UserApiSerializer
@@ -47,9 +44,7 @@ class UserCreateAPI(CreateAPIView):
         
                        
 
-#De aqui para abajo los avances para la diapositiva
-
-#De prueba POST y GET de Usar
+# Este era de prueba para crear nuevos usuarios pero se uso CreateAPIView
 @api_view(['GET','POST'])
 def user_view(request, format=None):
     if request.method == 'GET':

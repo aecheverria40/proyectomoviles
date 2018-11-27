@@ -58,7 +58,7 @@ class UserApiSerializer(serializers.ModelSerializer):
 class CoordinadorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coordinador
-        fields = ('id','IdCoordinador','apellidoMaternoCoordinador',
+        fields = ('id', 'user','apellidoMaternoCoordinador',
         'nombreCoordinador', 'direccionCoordinador', 'telefonoCoordinador',
         'email_Coordinador')
 

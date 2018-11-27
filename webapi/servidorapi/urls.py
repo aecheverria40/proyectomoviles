@@ -15,7 +15,7 @@ urlpatterns = [
     path('boleta/<int:pk>', views.boleta_detail),
 	path('clase/', views.clase_list),
     path('clase/<int:pk>', views.clase_detail),
-	path('parcial/', views.coordinador_list),
+	path('parcial/', views.parcial_list),
     path('parcial/<int:pk>', views.parcial_detail),
 
     #Prueba
