@@ -25,7 +25,7 @@ SECRET_KEY = '$%@e9-(=zi58+q9mk-9hf!)y6c0l6#j2&7qbec#@b^(4+@7$ox'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.94', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.94', '127.0.0.1','alejandro123.pythonanywhere.com']
 
 
 # Application definition
@@ -120,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/alejandro123/proyectomoviles/webapi/static'
 
 #RESTAPI
 REST_FRAMEWORK = {
