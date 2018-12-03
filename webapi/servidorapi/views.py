@@ -3,7 +3,8 @@ from django.contrib.auth.models import User, Group
 #Importar clase de rest_framework
 from rest_framework import viewsets
 #Importamos las cases de serializers.py
-from servidorapi.serializers import UserSerializer, GroupSerializer, UserApiSerializer
+from servidorapi.serializers import (UserSerializer, GroupSerializer, UserCreateSerializer, UserLoginSerializer, 
+    UsuariosSerializer)
 
 #Cosas a importar
 from rest_framework import status, permissions
@@ -17,7 +18,15 @@ from .serializers import (AlumnoSerializer, BoletaSerializer,
 ClaseSerializer, CoordinadorSerializer, DocenteSerializer, EscuelaSerializer)
 
 from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
+#Permisos
+from rest_framework.permissions import (
+        AllowAny,
+        IsAuthenticated,
+        IsAdminUser,
+        IsAuthenticatedOrReadOnly,
+    )
 
 User = get_user_model()
 
@@ -36,11 +45,29 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+class CoordinadorViewSet(viewsets.ModelViewSet):
+    queryset = Coordinador.objects.all() 
+    serializer_class = CoordinadorSerializer
+
 #De aqui para abajo los avances para la diapositiva
 
 class UserCreateAPI(CreateAPIView):
-    serializer_class = UserApiSerializer
+    serializer_class = UserCreateSerializer
     queryset = User.objects.all()
+
+class UserLoginAPI(APIView):
+    permission_classes = [AllowAny]
+    serializer_class = UserLoginSerializer
+    
+    def post(self, request, *args, **kwargs):
+        data = request.data #request.POST
+        serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            new_data = serializer.data
+            return Response(new_data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        
         
                        
 
@@ -49,11 +76,11 @@ class UserCreateAPI(CreateAPIView):
 def user_view(request, format=None):
     if request.method == 'GET':
         user = User.objects.all()
-        seralizer = UserApiSerializer(user, many=True)
+        seralizer = UserCreateSerializer(user, many=True)
         return Response(seralizer.data)
 
     elif request.method == 'POST':
-        seralizer = UserApiSerializer(data=request.data)
+        seralizer = UserCreateSerializer(data=request.data)
         if seralizer.is_valid():
             seralizer.save()
             # user.refresh_from_db()
@@ -114,6 +141,15 @@ def alumno_detail(request, pk, format=None):
         alumno.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+'''
+Usuario
+'''
+@api_view(['GET'])
+def usuario_list(request):
+    if request.method == 'GET':
+        usuarios = User.objects.all()
+        serializer = UsuariosSerializer(usuarios, many=True)
+        return Response(serializer.data)
 
 '''
 Coordinador
@@ -122,7 +158,9 @@ Coordinador
 def coordinador_list(request):
     if request.method == 'GET':
         coordinador = Coordinador.objects.all()
+        #print(coordinador)
         seralizer = CoordinadorSerializer(coordinador, many=True)
+        print(seralizer.data)
         return Response(seralizer.data)
 
     elif request.method == 'POST':

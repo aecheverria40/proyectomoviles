@@ -19,8 +19,10 @@ urlpatterns = [
     path('parcial/<int:pk>', views.parcial_detail),
 
     #Prueba
-    path('coordinadores/', views.user_view),
-    path('register/', views.UserCreateAPI.as_view(), name='register')
+    #path('coordinadores/', views.CoordinadorViewSet),
+    path('usuario/', views.usuario_list),
+    path('register/', views.UserCreateAPI.as_view(), name='register'),
+    path('login/', views.UserLoginAPI.as_view(), name='login')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
