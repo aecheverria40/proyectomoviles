@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<CoordinadorModel>>() {
             @Override
             public void onResponse(Call<List<CoordinadorModel>> call, Response<List<CoordinadorModel>> response) {
-                for(CoordinadorModel post : response.body()) {
-                    titles.add(post.getNombreCoordinador() + " " + post.getApellidoPaternoCoordinador());
+                for(CoordinadorModel get : response.body()) {
+                    titles.add(get.getNombreCoordinador() + " " + get.getApellidoPaternoCoordinador() + " " +
+                    get.getUser().username);
                 }
                 arrayAdapter.notifyDataSetChanged();
             }

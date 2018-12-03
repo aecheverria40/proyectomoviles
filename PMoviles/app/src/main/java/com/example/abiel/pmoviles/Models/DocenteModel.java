@@ -1,7 +1,7 @@
 package com.example.abiel.pmoviles.Models;
 
 public class DocenteModel {
-    public int IdDocente;
+    public int user;
     public String apellidoPaternoDocente;
     public String apellidoMaterno;
     public String nombreDocente;
@@ -10,12 +10,12 @@ public class DocenteModel {
     public String emailDocente;
     public int escuelas;
 
-    public int getIdDocente() {
-        return IdDocente;
+    public int getUser() {
+        return user;
     }
 
-    public void setIdDocente(int idDocente) {
-        IdDocente = idDocente;
+    public void setUser(int User) {
+        user = User;
     }
 
     public String getApellidoPaternoDocente() {

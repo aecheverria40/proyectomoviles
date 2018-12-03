@@ -1,21 +1,50 @@
 package com.example.abiel.pmoviles.Models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class CoordinadorModel extends UsuarioModel {
-    public int IdCoordinador;
+    //public int IdCoordinador;
+    @SerializedName("apellidoMaternoCoordinador")
+    @Expose
     public String apellidoMaternoCoordinador;
+    @SerializedName("apellidoPaternoCoordinador")
+    @Expose
     public String apellidoPaternoCoordinador;
+    @SerializedName("direccionCoordinador")
+    @Expose
     public String direccionCoordinador;
+    @SerializedName("email_Coordinador")
+    @Expose
     public String email_Coordinador;
+    @SerializedName("nombreCoordinador")
+    @Expose
     public String nombreCoordinador;
+    @SerializedName("telefonoCoordinador")
+    @Expose
     public String telefonoCoordinador;
+    @SerializedName("user")
+    @Expose
+    public UsuarioModel user;
 
-    public int getIdCoordinador() {
-        return IdCoordinador;
+    public UsuarioModel getUser() {
+        return user;
     }
 
-    public void setIdCoordinador(int idCoordinador) {
-        IdCoordinador = idCoordinador;
+    public void setUser(UsuarioModel user) {
+        this.user = user;
     }
+
+//    public int getIdCoordinador() {
+//        return IdCoordinador;
+//    }
+//
+//    public void setIdCoordinador(int idCoordinador) {
+//        IdCoordinador = idCoordinador;
+//    }
 
     public String getApellidoMaternoCoordinador() {
         return apellidoMaternoCoordinador;
