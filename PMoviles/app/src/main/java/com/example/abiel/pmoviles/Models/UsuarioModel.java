@@ -13,6 +13,9 @@ public class UsuarioModel {
     @SerializedName("email")
     @Expose
     public String email;
+    @SerializedName("email2")
+    @Expose
+    public String email2;
     @SerializedName("password")
     @Expose
     public String password;
@@ -40,6 +43,11 @@ public class UsuarioModel {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getEmail2() { return email2; }
+
+    public void setEmail2(String email2) { this.email2 = email2; }
+
 
     public String getPassword() {
         return password;
