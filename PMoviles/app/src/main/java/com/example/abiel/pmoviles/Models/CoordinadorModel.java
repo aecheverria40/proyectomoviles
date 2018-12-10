@@ -30,6 +30,10 @@ public class CoordinadorModel extends UsuarioModel {
     @Expose
     public UsuarioModel user;
 
+    public CoordinadorModel(int Id){
+        id = Id;
+    }
+
     public UsuarioModel getUser() {
         return user;
     }
@@ -92,5 +96,10 @@ public class CoordinadorModel extends UsuarioModel {
 
     public void setTelefonoCoordinador(String telefonoCoordinador) {
         this.telefonoCoordinador = telefonoCoordinador;
+    }
+
+    public String toString()
+    {
+        return getNombreCoordinador() + " " + getApellidoPaternoCoordinador();
     }
 }
