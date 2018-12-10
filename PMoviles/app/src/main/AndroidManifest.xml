@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".loadscreen" />
-        <activity android:name=".LoginScreen"></activity>
+        <activity android:name=".LoginScreen" />
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
