@@ -31,7 +31,7 @@ public interface CoordinadorService {
 
     @PUT(API_PUT)
     @FormUrlEncoded
-    Call<CoordinadorModel> putCoordinador(@Path("id") long id,
+    Call<CoordinadorModel> putCoordinador(@Path("id") int id,
                                             @Field("apellidoPaternoCoordinador") String apellidoPaternoCoordinador,
                                            @Field("apellidoMaternoCoordinador") String apellidoMaternoCoordinador,
                                            @Field("nombreCoordinador") String nombreCoordinador,

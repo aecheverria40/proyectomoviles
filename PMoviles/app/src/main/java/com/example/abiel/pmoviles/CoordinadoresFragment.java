@@ -3,7 +3,10 @@ package com.example.abiel.pmoviles;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ListFragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +50,10 @@ public class CoordinadoresFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_coordinadores, container, false);
 
+
+
         //Cliente para Get
-        ArrayAdapter <CoordinadorModel> arrayAdapter = new ArrayAdapter(getActivity().getApplicationContext(),
+        ArrayAdapter <CoordinadorModel> arrayAdapter = new ArrayAdapter<CoordinadorModel>(getActivity().getApplicationContext(),
                 android.R.layout.simple_list_item_1, titles);
 
         list = view.findViewById(R.id.list);
@@ -57,20 +62,39 @@ public class CoordinadoresFragment extends Fragment {
 
         list.setAdapter(arrayAdapter);
 
+        getCoordinador2(arrayAdapter);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CoordinadorModel coordinador = (CoordinadorModel) parent.getItemAtPosition(position);
 
-                //String title= parent.getItemAtPosition(position).getTitle();
-                //id = parent.getItemAtPosition(position).;
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                        coordinador.getApellidoMaternoCoordinador() + coordinador.getId(), Toast.LENGTH_SHORT);
 
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(),position + 1,
-                        Toast.LENGTH_SHORT);
                 toast.show();
+
+                Integer coordinador_id = coordinador.getId();
+                String co_id = coordinador_id.toString();
+
+                //Fragmento de EditCoordinador
+                EditCoordinadorFragment editCoordinadorFragment = new EditCoordinadorFragment();
+                Bundle args = new Bundle();
+
+                args.putString("Id", co_id);
+
+                editCoordinadorFragment.setArguments(args);
+//                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditCoordinadorFragment(), null).commit();
+//                getFragmentManager().beginTransaction().add(R.id.fragment_container, editCoordinadorFragment).commit();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().
+                        replace(R.id.fragment_container, editCoordinadorFragment,
+                                null).addToBackStack(null).commit();
+
             }
         });
 
-        getCoordinador2(arrayAdapter);
+
         return view;
     }
 
@@ -79,8 +103,8 @@ public class CoordinadoresFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CoordinadorModel>> call, Response<List<CoordinadorModel>> response) {
                 for (CoordinadorModel get : response.body()){
-                    //titles.add(get.getNombreCoordinador() + " " + get.getUser().username);
                     titles.add(get);
+                    //titles.add(get);
                 }
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -92,5 +116,32 @@ public class CoordinadoresFragment extends Fragment {
         });
     }
 
+//    @Override
+//    public void onListItemClick(ListView l, View v, int position, long id) {
+//
+//        // TODO implement some logic
+//        try {
+//
+//            String selectedValue=(String)
+//                    getListAdapter().getItem(position);
+//
+//            Toast.makeText(getContext(),selectedValue,Toast.LENGTH_SHORT).show();
+//
+////            Bundle args=new Bundle();
+////            args.putString("message",selectedValue);
+////            listafrag obj = new listafrag();
+////            obj.setArguments(args);
+////
+////            MainActivity.fragmentManager.beginTransaction().replace(
+////                    R.id.headline_fragment, obj,null).commit();
+//
+//        }catch (Exception e)
+//        {
+//            Toast.makeText(getContext(), "No hay alumnos en el evento",
+//                    Toast.LENGTH_SHORT).show();
+//        }
+//
+//    }
 
 }
+

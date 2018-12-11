@@ -7,32 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoordinadorModel extends UsuarioModel {
-    //public int IdCoordinador;
+//    @SerializedName("id")
+//    @Expose
+//    private Integer id;
     @SerializedName("apellidoMaternoCoordinador")
     @Expose
-    public String apellidoMaternoCoordinador;
+    private String apellidoMaternoCoordinador;
     @SerializedName("apellidoPaternoCoordinador")
     @Expose
-    public String apellidoPaternoCoordinador;
+    private String apellidoPaternoCoordinador;
     @SerializedName("direccionCoordinador")
     @Expose
-    public String direccionCoordinador;
+    private String direccionCoordinador;
     @SerializedName("email_Coordinador")
     @Expose
-    public String email_Coordinador;
+    private String email_Coordinador;
     @SerializedName("nombreCoordinador")
     @Expose
-    public String nombreCoordinador;
+    private String nombreCoordinador;
     @SerializedName("telefonoCoordinador")
     @Expose
-    public String telefonoCoordinador;
+    private String telefonoCoordinador;
     @SerializedName("user")
     @Expose
-    public UsuarioModel user;
-
-    public CoordinadorModel(int Id){
-        id = Id;
-    }
+    private UsuarioModel user;
 
     public UsuarioModel getUser() {
         return user;
@@ -42,12 +40,12 @@ public class CoordinadorModel extends UsuarioModel {
         this.user = user;
     }
 
-//    public int getIdCoordinador() {
-//        return IdCoordinador;
+//    public int getCoorId() {
+//        return id;
 //    }
 //
-//    public void setIdCoordinador(int idCoordinador) {
-//        IdCoordinador = idCoordinador;
+//    public void setCoorId(int Id) {
+//        this.id = Id;
 //    }
 
     public String getApellidoMaternoCoordinador() {
@@ -98,8 +96,9 @@ public class CoordinadorModel extends UsuarioModel {
         this.telefonoCoordinador = telefonoCoordinador;
     }
 
+    @Override
     public String toString()
     {
-        return getNombreCoordinador() + " " + getApellidoPaternoCoordinador();
+        return getId() + " " + getNombreCoordinador();
     }
 }

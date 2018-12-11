@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 public class UsuarioModel {
+    @SerializedName("id")
+    @Expose
     public int id;
     @SerializedName("username")
     @Expose
