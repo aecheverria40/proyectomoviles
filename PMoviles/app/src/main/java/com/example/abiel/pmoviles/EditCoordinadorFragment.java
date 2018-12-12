@@ -1,6 +1,8 @@
 package com.example.abiel.pmoviles;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 import com.example.abiel.pmoviles.Interface.ApiUtils;
 import com.example.abiel.pmoviles.Interface.CoordinadorService;
 import com.example.abiel.pmoviles.Models.CoordinadorModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +50,12 @@ public class EditCoordinadorFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_coordinador, container, false);
         String value_id = getArguments().getString("Id");
+        String value_nombre = getArguments().getString("nombre");
+        String value_apellidopa = getArguments().getString("apellidopa");
+        String value_apellidoma = getArguments().getString("apellidoma");
+        String value_direccion = getArguments().getString("direccion");
+        String value_telefono = getArguments().getString("telefono");
+        String value_correo = getArguments().getString("correo");
 
         nombre = (EditText) view.findViewById(R.id.coordinator_nombre);
         apellidoma = (EditText) view.findViewById(R.id.coordinator_apellidoma);
@@ -60,6 +70,13 @@ public class EditCoordinadorFragment extends Fragment {
 
         coordinador_id.setText(value_id);
         coordinador_id.setEnabled(false);
+
+        nombre.setText(value_nombre);
+        apellidoma.setText(value_apellidoma);
+        apellidopa.setText(value_apellidopa);
+        telefono.setText(value_telefono);
+        correo.setText(value_correo);
+        direccion.setText(value_direccion);
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,13 +100,12 @@ public class EditCoordinadorFragment extends Fragment {
         return view;
     }
 
-
     private void sendPutCoordinador(int id, String apellidoMaternoCoordinador, String apellidoPaternoCoordinador,
                                     String direccionCoordinador, String email_Coordinador, String nombreCoordinador,
                                     String telefonoCoordinador){
 
         mcoordinadorService.putCoordinador(id, apellidoMaternoCoordinador, apellidoPaternoCoordinador,
-                direccionCoordinador, email_Coordinador, nombreCoordinador, telefonoCoordinador).
+                direccionCoordinador,email_Coordinador , nombreCoordinador, telefonoCoordinador).
                 enqueue(new Callback<CoordinadorModel>() {
                     @Override
                     public void onResponse(Call<CoordinadorModel> call, Response<CoordinadorModel> response) {
@@ -98,11 +114,28 @@ public class EditCoordinadorFragment extends Fragment {
                             msg = response.raw().toString();
                             showResponse(msg);
                             Log.i(TAG, "post submitted to API" + response.body().toString());
+
+                            //Caja de Dialogo
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                            builder.setMessage("Cambios guardados con exito.");
+                            builder.setTitle("Exito");
+
+                            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new CoordinadoresFragment()).commit();
+                                }
+                            });
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+
                         }
                         else{
                             msg = response.raw().toString();
                             showResponse(msg);
-                            Log.i(TAG, "post not submitted to API" + response.body().toString());
+                            //Log.i(TAG, "post not submitted to API" + response.body().toString());
                         }
                     }
 

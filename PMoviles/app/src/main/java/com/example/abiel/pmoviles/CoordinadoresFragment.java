@@ -82,6 +82,12 @@ public class CoordinadoresFragment extends Fragment {
                 Bundle args = new Bundle();
 
                 args.putString("Id", co_id);
+                args.putString("nombre", coordinador.getNombreCoordinador());
+                args.putString("apellidopa", coordinador.getApellidoPaternoCoordinador());
+                args.putString("apellidoma", coordinador.getApellidoMaternoCoordinador());
+                args.putString("direccion", coordinador.getDireccionCoordinador());
+                args.putString("telefono", coordinador.getTelefonoCoordinador());
+                args.putString("correo", coordinador.getEmail_Coordinador());
 
                 editCoordinadorFragment.setArguments(args);
 //                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditCoordinadorFragment(), null).commit();
@@ -115,33 +121,6 @@ public class CoordinadoresFragment extends Fragment {
             }
         });
     }
-
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//
-//        // TODO implement some logic
-//        try {
-//
-//            String selectedValue=(String)
-//                    getListAdapter().getItem(position);
-//
-//            Toast.makeText(getContext(),selectedValue,Toast.LENGTH_SHORT).show();
-//
-////            Bundle args=new Bundle();
-////            args.putString("message",selectedValue);
-////            listafrag obj = new listafrag();
-////            obj.setArguments(args);
-////
-////            MainActivity.fragmentManager.beginTransaction().replace(
-////                    R.id.headline_fragment, obj,null).commit();
-//
-//        }catch (Exception e)
-//        {
-//            Toast.makeText(getContext(), "No hay alumnos en el evento",
-//                    Toast.LENGTH_SHORT).show();
-//        }
-//
-//    }
 
 }
 

@@ -1,10 +1,20 @@
 package com.example.abiel.pmoviles;
 
+import android.content.Intent;
+import android.net.nsd.NsdManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
+    private DrawerLayout mDrawer;
     public static FragmentManager fragmentManager;
     //private Toolbar toolbar;
     //private CoordinadorService mcoordinadorService;
@@ -51,61 +62,71 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.fragment_container, coordinadoresFragment, null);
         fragmentTransaction.commit();
 
-        //Toolbar
-        //toolbar = findViewById(R.id.toolBar);
-        //setSupportActionBar(toolbar);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        Menu m = navigationView.getMenu();
+        SubMenu coordinador = m.addSubMenu("Coordinador");
+        coordinador.add("Registrar");
+        coordinador.add("Coordinadores");
+        coordinador.add("Escuelas");
+        coordinador.add("Maestros");
+        SubMenu subMenu1 = m.addSubMenu("Maestros");
+        subMenu1.add("Materias");
+        subMenu1.add("Horarios");
+        SubMenu alumno = m.addSubMenu("Alumno");
+        alumno.add("Registrar Materia");
+        alumno.add("Horario");
+        alumno.add("Calificaciones");
+        SubMenu opciones = m.addSubMenu("Opciones");
+        alumno.add("Salir");
 
-        //Cliente para Get
-        //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles);
-        //list = findViewById(R.id.list);
-
-        //mcoordinadorService = ApiUtils.getAPIServiceCoordinador();
-
-        //list.setAdapter(arrayAdapter);
-
-        //getCoordinadores(arrayAdapter);
-        //getCoordinador2(arrayAdapter);
+        setupDrawerContent(navigationView);
 
     }
 
-//    private void getCoordinadores(final ArrayAdapter arrayAdapter) {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://alejandro123.pythonanywhere.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        CoordinadorService coordinadorService = retrofit.create(CoordinadorService.class);
-//        Call< List<CoordinadorModel> > call = coordinadorService.getCoordinador();
-//
-//        call.enqueue(new Callback<List<CoordinadorModel>>() {
-//            @Override
-//            public void onResponse(Call<List<CoordinadorModel>> call, Response<List<CoordinadorModel>> response) {
-//                for(CoordinadorModel get : response.body()) {
-//                    titles.add(get.getNombreCoordinador() + " " + get.getApellidoPaternoCoordinador() + " " +
-//                    get.getUser().username);
-//                }
-//                arrayAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<CoordinadorModel>> call, Throwable t) {
-//            }
-//        });
-//    }
+    private void setupDrawerContent(final NavigationView navigationView){
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                selectDrawerItem(menuItem);
+                return true;
+            }
+        });
+    }
 
-//    private void getCoordinador2(final ArrayAdapter arrayAdapter){
-//        mcoordinadorService.getCoordinador().enqueue(new Callback<List<CoordinadorModel>>() {
-//            @Override
-//            public void onResponse(Call<List<CoordinadorModel>> call, Response<List<CoordinadorModel>> response) {
-//                for (CoordinadorModel get : response.body()){
-//                    titles.add(get.getNombreCoordinador());
-//                }
-//                arrayAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<CoordinadorModel>> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    private void selectDrawerItem(MenuItem menuItem){
+        Fragment fragment = null;
+        Class fragmentClass = null;
+        CharSequence m = menuItem.getTitle();
+        //CharSequence m2 = menuItem.getItemId();
+        switch (menuItem.getTitle().toString()){
+            case "Registrar":
+                fragmentClass = RegisterFragment.class;
+                break;
+
+            case "Coordinadores":
+                fragmentClass = CoordinadoresFragment.class;
+
+                break;
+
+            case "Salir":
+                Intent intent2 = new Intent(this, LoginActivity.class);
+                startActivity(intent2);
+        }
+
+        try{
+            fragment = (Fragment) fragmentClass.newInstance();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+
+        //Highlight
+        menuItem.setChecked(true);
+
+        //Cerar
+        //mDrawer.closeDrawers();
+    }
 }

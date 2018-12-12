@@ -13,11 +13,14 @@ import retrofit2.http.Path;
 
 public interface CoordinadorService {
     String API_ROUT = "/api/coordinador/";
-    String API_PUT = "/api/coordinador/{id}/";
+    String API_PUT = "/api/coordinador/{id}";
 
 
     @GET(API_ROUT)
     Call<List<CoordinadorModel>> getCoordinador();
+
+    @GET(API_PUT)
+    Call<CoordinadorModel> getCoordinadorInfo(@Path("id") int id);
 
     @POST(API_ROUT)
     @FormUrlEncoded
@@ -32,11 +35,13 @@ public interface CoordinadorService {
     @PUT(API_PUT)
     @FormUrlEncoded
     Call<CoordinadorModel> putCoordinador(@Path("id") int id,
-                                            @Field("apellidoPaternoCoordinador") String apellidoPaternoCoordinador,
-                                           @Field("apellidoMaternoCoordinador") String apellidoMaternoCoordinador,
-                                           @Field("nombreCoordinador") String nombreCoordinador,
-                                           @Field("direccionCoordinador") String direccionCoordinador,
-                                           @Field("telefonoCoordinador") String telefonoCoordinador,
-                                           @Field("email_Coordinador") String email_Coordinador
+                                          @Field("apellidoMaternoCoordinador") String apellidoMaternoCoordinador,
+                                          @Field("apellidoPaternoCoordinador") String apellidoPaternoCoordinador,
+                                          @Field("direccionCoordinador") String direccionCoordinador,
+                                          @Field("email_Coordinador") String email_Coordinador,
+                                          @Field("nombreCoordinador") String nombreCoordinador,
+                                          @Field("telefonoCoordinador") String telefonoCoordinador
+                                          //@Field("apellidoPaternoCoordinador") String apellidoPaternoCoordinador,
+
                                              );
 }

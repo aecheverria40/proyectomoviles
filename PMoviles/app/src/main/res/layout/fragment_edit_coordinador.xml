@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditCoordinadorFragment">
+    tools:context=".EditCoordinadorFragment"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <!--<TextView-->
@@ -13,87 +14,89 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
-                layout="@layout/toolbar_layout"/>
+            <include layout="@layout/toolbar_layout" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:text="Editar Perfil"/>
+                android:text="Editar Perfil"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <EditText
                 android:id="@+id/coordinator_id"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Coordinador ID"/>
+                android:layout_marginTop="18dp"
+                android:hint="Coordinador ID" />
 
             <EditText
                 android:id="@+id/coordinator_nombre"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"/>
+                android:layout_marginTop="18dp"
+                android:hint="Nombre" />
 
             <EditText
                 android:id="@+id/coordinator_apellidopa"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellido Paterno"/>
+                android:layout_marginTop="18dp"
+                android:hint="Apellido Paterno" />
 
             <EditText
                 android:id="@+id/coordinator_apellidoma"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellido Materno"/>
+                android:layout_marginTop="18dp"
+                android:hint="Apellido Materno" />
 
             <EditText
                 android:id="@+id/coordinator_direccion"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Direccion"/>
+                android:layout_marginTop="18dp"
+                android:hint="Direccion" />
 
             <EditText
                 android:id="@+id/coordinator_email"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Correo electronico"/>
+                android:layout_marginTop="18dp"
+                android:hint="Correo electronico" />
 
             <EditText
                 android:id="@+id/coordinator_telefono"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Telefono de Contacto"/>
+                android:layout_marginTop="18dp"
+                android:hint="Telefono de Contacto" />
 
             <TextView
                 android:id="@+id/tv_response"
-                android:layout_marginTop="35dp"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_submit"
-                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
                 android:background="@color/colorAccent"
+                android:text="@string/action_submit"
                 android:textColor="@android:color/white"
-                android:text="@string/action_submit"/>
-
-
+                />
 
 
         </LinearLayout>
