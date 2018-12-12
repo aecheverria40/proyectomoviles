@@ -17,8 +17,8 @@ import retrofit2.http.Path;
 public interface UsuarioService {
     String API_ROUT = "api/usuario/";
     String API_POST = "api/register/";
-    String API_PUT = "api/register/{id}/";
-    String API_DELETE = "api/register/{id}/";
+    String API_PUT = "api/register/{id}";
+    String API_DELETE = "api/register/{id}";
 
     @GET(API_ROUT)
     Call<List<UsuarioModel>> getUsuarios();

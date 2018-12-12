@@ -15,4 +15,9 @@ public class ApiUtils {
         return RetrofitClient.getClient(BASE_URL).create(CoordinadorService.class);
     }
 
+    //Docente
+    public static DocenteService getAPIServiceDocente(){
+        return RetrofitClient.getClient(BASE_URL).create(DocenteService.class);
+    }
+
 }
