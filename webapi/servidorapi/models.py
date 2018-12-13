@@ -62,7 +62,7 @@ class Escuela(models.Model):
         return self.clave
 
 class Docente(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
     apellidoPaternoDocente = models.CharField(max_length=100)
     apellidoMaterno = models.CharField(max_length=100)
     nombreDocente = models.CharField(max_length=100)
