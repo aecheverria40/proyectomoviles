@@ -40,7 +40,9 @@ class Coordinador(models.Model):
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Coordinador.objects.create(user=instance)
+        Docente.objects.create(user=instance)
     instance.coordinador.save()
+    instance.docente.save()
 
 #Max Gordon
 # def crate_coordinador(sender, **kwargs):
