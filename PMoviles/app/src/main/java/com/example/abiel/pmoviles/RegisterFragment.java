@@ -1,10 +1,13 @@
 package com.example.abiel.pmoviles;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,29 +20,33 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Main2Activity extends AppCompatActivity {
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class RegisterFragment extends Fragment {
     private TextView mResponseTv;
     private UsuarioService musuarioService;
     private static final String TAG = Main2Activity.class.getName();
 
+    public RegisterFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        //Los del tutorial
-//        final EditText titleEt = (EditText) findViewById(R.id.et_title);
-//        final EditText bodyEt = (EditText) findViewById(R.id.et_body);
+        final EditText user_name = (EditText) view.findViewById(R.id.usu_username);
+        final EditText user_email = (EditText) view.findViewById(R.id.usu_email);
+        final EditText user_email2 = (EditText) view.findViewById(R.id.usu_email2);
+        final EditText user_password = (EditText) view.findViewById(R.id.usu_password);
 
-        //Los mios merengues
-        final EditText user_name = (EditText) findViewById(R.id.usu_username);
-        final EditText user_email = (EditText) findViewById(R.id.usu_email);
-        final EditText user_email2 = (EditText) findViewById(R.id.usu_email2);
-        final EditText user_password = (EditText) findViewById(R.id.usu_password);
-
-        Button submitBtn = (Button) findViewById(R.id.btn_submit);
-        mResponseTv = (TextView) findViewById(R.id.tv_response);
+        Button submitBtn = (Button) view.findViewById(R.id.btn_submit);
+        mResponseTv = (TextView) view.findViewById(R.id.tv_response);
 
         musuarioService = ApiUtils.getAPIService();
 
@@ -62,6 +69,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        return view;
     }
 
     public void sendPost(String username,String email, String email2,String password){

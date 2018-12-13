@@ -1,21 +1,41 @@
 package com.example.abiel.pmoviles.Models;
 
-public class DocenteModel {
-    public int user;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class DocenteModel extends UsuarioModel{
+    @SerializedName("user")
+    @Expose
+    public UsuarioModel user;
+    @SerializedName("apellidoPaternoDocente")
+    @Expose
     public String apellidoPaternoDocente;
+    @SerializedName("apellidoMaterno")
+    @Expose
     public String apellidoMaterno;
+    @SerializedName("nombreDocente")
+    @Expose
     public String nombreDocente;
+    @SerializedName("direccionDocente")
+    @Expose
     public String direccionDocente;
+    @SerializedName("telefonoDocente")
+    @Expose
     public String telefonoDocente;
+    @SerializedName("emailDocente")
+    @Expose
     public String emailDocente;
+    //Cambiar a Escuelas
+    @SerializedName("escuelas")
+    @Expose
     public int escuelas;
 
-    public int getUser() {
+    public UsuarioModel getUser() {
         return user;
     }
 
-    public void setUser(int User) {
-        user = User;
+    public void setUser(UsuarioModel user) {
+        this.user = user;
     }
 
     public String getApellidoPaternoDocente() {
