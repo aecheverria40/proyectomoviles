@@ -27,7 +27,7 @@
         android:layout_centerVertical="true"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:src="@drawable/splash1" />
+        android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/login_email"

@@ -43,6 +43,7 @@ def update_user_profile(sender, instance, created, **kwargs):
         Docente.objects.create(user=instance)
     instance.coordinador.save()
     instance.docente.save()
+    
 
 #Max Gordon
 # def crate_coordinador(sender, **kwargs):
@@ -62,7 +63,7 @@ class Escuela(models.Model):
         return self.clave
 
 class Docente(models.Model):
-    IdDocente = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
     apellidoPaternoDocente = models.CharField(max_length=100)
     apellidoMaterno = models.CharField(max_length=100)
     nombreDocente = models.CharField(max_length=100)
@@ -90,6 +91,13 @@ class Docente(models.Model):
 
     def getEmail(self):
         return self.emailDocente
+
+#Abiel
+# @receiver(post_save, sender=User)
+# def update_user_profile2(sender, instance, created, **kwargs):
+#     if created:
+#         Docente.objects.create(user=instance)
+#     instance.docente.save()
 
 class Clase(models.Model):
     IdClase = models.CharField(max_length=100, primary_key=True)

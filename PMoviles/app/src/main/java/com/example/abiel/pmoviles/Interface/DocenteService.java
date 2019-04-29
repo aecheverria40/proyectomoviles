@@ -14,15 +14,15 @@ import retrofit2.http.Path;
 
 
 public interface DocenteService {
-    String API_ROUT = "/api/Docente/";
-    String API_PUT = "/api/Docente/{id}";
+    String API_ROUT = "/api/docente/";
+    String API_PUT = "/api/docente/{id}";
 
     @GET(API_ROUT)
     Call<List<DocenteModel>> getDocente();
 
     @POST(API_ROUT)
     @FormUrlEncoded
-    Call<DocenteModel> postDocente(@Field("IdDocente") String IdDocente,
+    Call<DocenteModel> postDocente(@Field("idDocente") String IdDocente,
                                    @Field("apellidoPaternoDocente") String apellidoPaternoDocente,
                                    @Field("apellidoMaterno") String apellidoMaterno,
                                    @Field("nombreDocente") String nombreDocente,
@@ -33,7 +33,7 @@ public interface DocenteService {
 
     @PUT(API_PUT)
     @FormUrlEncoded
-    Call<DocenteModel> putDocente(@Path("idDocente") String idDocente,
+    Call<DocenteModel> putDocente(@Path("idDocente") String IdDocente,
                                   @Field("apellidoPaternoDocente") String apellidoPaternoDocente,
                                   @Field("apellidoMaterno") String apellidoMaterno,
                                   @Field("nombreDocente") String nombreDocente,

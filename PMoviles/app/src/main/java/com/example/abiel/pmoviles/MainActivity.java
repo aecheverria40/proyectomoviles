@@ -108,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
 
+            case "Maestros":
+                fragmentClass = DocenteFragment.class;
+                break;
+
             case "Salir":
                 Intent intent2 = new Intent(this, LoginActivity.class);
                 startActivity(intent2);

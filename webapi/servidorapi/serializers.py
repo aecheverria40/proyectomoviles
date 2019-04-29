@@ -131,16 +131,16 @@ class UserLoginSerializer(serializers.ModelSerializer):
         data["token"] = "SOME RANDOM TOKEN"
 
         return data
-        
-            
-# De aqui para abajo los cools que si funcionan      
+
+
+# De aqui para abajo los cools que si funcionan
 
 #Serializador para los nombres de usuario
 class UsuariosSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'email')
-    
+
 
 class CoordinadorSerializer(serializers.ModelSerializer):
     user = UsuariosSerializer(read_only=True)
@@ -154,11 +154,10 @@ class EscuelaSerializer(serializers.ModelSerializer):
         fields = ('clave', 'direccion', 'telefono', 'director', 'coordinador')
 
 class DocenteSerializer(serializers.ModelSerializer):
+    user = UsuariosSerializer(read_only=True)
     class Meta:
         model = Docente
-        fields = ('id', 'IdDocente', 'apellidoPaternoDocente', 'apellidoMaterno',
-        'nombreDocente', 'direccionDocente', 'telefonoDocente', 'emailDocente',
-        'escuelas')
+        fields = ('__all__')
 
 class ClaseSerializer(serializers.ModelSerializer):
     class Meta:

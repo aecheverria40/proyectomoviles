@@ -93,4 +93,16 @@ public class DocenteModel extends UsuarioModel{
     public void setEscuelas(int escuelas) {
         this.escuelas = escuelas;
     }
+
+    @Override
+    public String toString()
+    {
+
+        if (getNombreDocente().isEmpty()) {
+            return getId() + " - " + "Sin Nombre";
+        } else {
+            return getId() + " - " + getNombreDocente();
+
+        }
+    }
 }

@@ -97,8 +97,12 @@ public class CoordinadorModel extends UsuarioModel {
     }
 
     @Override
-    public String toString()
-    {
-        return getId() + " " + getNombreCoordinador();
+    public String toString() {
+        if (getNombreCoordinador().isEmpty()) {
+            return getId() + " - " + "Sin Nombre";
+        } else {
+            return getId() + " - " + getNombreCoordinador();
+
+        }
     }
 }
